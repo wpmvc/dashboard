@@ -1,6 +1,6 @@
 {
 	"name": "@wpmvc/admin-sidebar",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Professional React hooks for WordPress admin interfaces with complete sidebar management and responsive layout control.",
 	"author": "Md Al Amin",
   	"license": "MIT",
