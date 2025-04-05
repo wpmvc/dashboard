@@ -40,41 +40,45 @@ yarn add @wpmvc/admin-sidebar react-router-dom
 ### With React Router  
 
 ```tsx  
-import { HashRouter, useLocation, useNavigate } from 'react-router-dom';  
-import { useActiveAdminMenu, useWPSidebarStatus } from '@wpmvc/admin-sidebar';  
+import { HashRouter, useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useActiveAdminMenu, useWPSidebarStatus } from '@wpmvc/admin-sidebar';
 
-const AdminApp = () => {  
-  // Required hooks  
-  const navigate = useNavigate();  
-  const location = useLocation();  
-  const { left, top, width } = useWPSidebarStatus();  
+const Layout = () => {
+	// Required hooks
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { left, top, width } = useWPSidebarStatus();
 
-  // Initialize menu management  
-  useActiveAdminMenu({  
-    pageTopLevelID: '#toplevel_page_my-plugin',  
-    rootPaths: ['#/', '#/dashboard'],  
-    navigate,  
-    location  
-  });  
+	// Initialize menu management
+	useActiveAdminMenu( {
+		pageTopLevelID: '#toplevel_page_my-plugin',
+		rootPaths: [ '#/', '#/dashboard' ],
+		navigate,
+		location,
+	} );
 
-  return (  
-    <div style={{  
-      marginLeft: left,  
-      marginTop: top,  
-      width,  
-      transition: 'margin-left 0.3s ease'  
-    }}>  
-      <h1>Dashboard</h1>  
-    </div>  
-  );  
-};  
+	return (
+		<div
+			style={ {
+				marginLeft: left,
+				marginTop: top,
+				width,
+				transition: 'margin-left 0.3s ease',
+			} }
+		>
+			<Outlet />
+		</div>
+	);
+};
 
-// Entry point  
-export default () => (  
-  <HashRouter>  
-    <AdminApp />  
-  </HashRouter>  
-);  
+// Entry point
+export default () => (
+	<HashRouter>
+		<Route element={ <Layout /> }>
+			{ /* Add your route items */ }
+		</Route>
+	</HashRouter>
+);
 ```  
 
 ---
