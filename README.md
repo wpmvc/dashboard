@@ -1,10 +1,6 @@
 # @wpmvc/admin-sidebar  
 
-[![npm](https://img.shields.io/npm/v/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar)  
-[![downloads](https://img.shields.io/npm/dm/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar)  
-[![License](https://img.shields.io/npm/l/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar)  
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@wpmvc/admin-sidebar)](https://bundlephobia.com/package/@wpmvc/admin-sidebar)  
-[![TypeScript](https://img.shields.io/badge/types-Typescript-blue)](https://www.typescriptlang.org/)  
+[![npm](https://img.shields.io/npm/v/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar) [![downloads](https://img.shields.io/npm/dm/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar) [![License](https://img.shields.io/npm/l/@wpmvc/admin-sidebar.svg)](https://www.npmjs.com/package/@wpmvc/admin-sidebar) [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@wpmvc/admin-sidebar)](https://bundlephobia.com/package/@wpmvc/admin-sidebar) [![TypeScript](https://img.shields.io/badge/types-Typescript-blue)](https://www.typescriptlang.org/)  
 
 Professional React hooks for WordPress admin interfaces with complete sidebar management and responsive layout control.
 
