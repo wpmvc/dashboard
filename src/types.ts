@@ -8,9 +8,8 @@ export interface ActiveMenuConfig {
 }
 
 export interface SidebarLayout {
-	left: string;
-	top: string;
-	width: string;
+	left: number;
+	top: number;
 }
 
 export interface SidebarEventData {

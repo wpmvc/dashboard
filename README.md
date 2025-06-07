@@ -8,7 +8,7 @@ Professional React hooks for WordPress admin interfaces with complete sidebar ma
 
 ✨ **Dual Hook System**
 - `useActiveAdminMenu` - Intelligent menu highlighting
-- `useWPSidebarStatus` - Real-time sidebar state tracking
+- `useAdminSidebarLayout` - Real-time sidebar state tracking
 
 🚀 **Seamless Integration**
 - HashRouter support
@@ -37,13 +37,13 @@ yarn add @wpmvc/admin-sidebar react-router-dom
 
 ```tsx  
 import { HashRouter, useLocation, useNavigate, Outlet } from 'react-router-dom';
-import { useActiveAdminMenu, useWPSidebarStatus } from '@wpmvc/admin-sidebar';
+import { useActiveAdminMenu, useAdminSidebarLayout } from '@wpmvc/admin-sidebar';
 
 const Layout = () => {
 	// Required hooks
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { left, top, width } = useWPSidebarStatus();
+	const { left, top } = useAdminSidebarLayout();
 
 	// Initialize menu management
 	useActiveAdminMenu( {
@@ -58,7 +58,6 @@ const Layout = () => {
 			style={ {
 				marginLeft: left,
 				marginTop: top,
-				width,
 				transition: 'margin-left 0.3s ease',
 			} }
 		>
@@ -95,22 +94,14 @@ export default () => (
 
 ---
 
-### `useWPSidebarStatus(): SidebarLayout`  
+### `useAdminSidebarLayout(): SidebarLayout`  
 
 **Return Object:**  
 
 | Property | Type | Example Value |  
 |----------|------|--------------|  
-| `left` | `string` | `"190px"` (expanded) |  
-| `top` | `string` | `"32px"` (admin bar) |  
-| `width` | `string` | `"calc(100% - 190px)"` |  
-
-<!-- **Mobile Behavior:**  
-Automatically returns `{ left: "0", width: "100%" }` when:  
-- Screen width < 782px  
-- WordPress mobile menu is active  
-
---- -->
+| `left` | `number` | `190px` (expanded) |  
+| `top` | `number` | `32px` (admin bar) | 
 
 ## Contributing
 

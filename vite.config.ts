@@ -35,6 +35,7 @@ export default defineConfig({
           '@wordpress/hooks': 'wp.hooks',
           '@wordpress/compose': 'wp.compose',
           '@wordpress/block-editor': 'wp.blockEditor',
+          '@wordpress/viewport': 'wp.viewport',
           'react-router-dom': 'ReactRouterDOM',
         },
       },
