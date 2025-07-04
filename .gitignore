@@ -12,3 +12,4 @@ package-lock.json
 yarn.lock
 __*
 .DS_Store
+pnpm-workspace.yaml

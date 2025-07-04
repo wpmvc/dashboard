@@ -1,11 +1,11 @@
 {
-	"name": "@wpmvc/admin-sidebar",
-	"version": "0.0.3",
-	"description": "Professional React hooks for WordPress admin interfaces with complete sidebar management and responsive layout control.",
+	"name": "@wpmvc/dashboard",
+	"version": "0.0.1",
+	"description": "WpMVC dashboard builder",
 	"author": "Md Al Amin",
 	"license": "MIT",
-	"main": "build/admin-sidebar.umd.js",
-	"module": "build/admin-sidebar.es.js",
+	"main": "build/dashboard.umd.js",
+	"module": "build/dashboard.es.js",
 	"types": "build-types/types/index.d.ts",
 	"scripts": {
 		"start": "vite build --watch",
@@ -22,15 +22,14 @@
 	},
 	"keywords": [
 		"wordpress",
-		"react",
-		"hooks",
-		"admin",
-		"sidebar"
+		"wpmvc",
+		"dashboard builder",
+		"gutenberg"
 	],
-	"homepage": "https://github.com/wpmvc/admin-sidebar",
-	"repository": "git+https://github.com/wpmvc/admin-sidebar.git",
+	"homepage": "https://github.com/wpmvc/dashboard",
+	"repository": "git+https://github.com/wpmvc/dashboard.git",
 	"bugs": {
-		"url": "https://github.com/wpmvc/admin-sidebar/issues"
+		"url": "https://github.com/wpmvc/dashboard/issues"
 	},
 	"peerDependencies": {
 		"@wordpress/element": "^6.18.0",
@@ -39,18 +38,32 @@
 		"react-router-dom": "^7.4.1"
 	},
 	"devDependencies": {
-		"@types/lodash": "^4.17.15",
-		"@types/react": "^19.0.10",
-		"@types/react-dom": "^19.0.4",
+		"@types/lodash": "^4.17.20",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
 		"@types/react-router-dom": "^5.3.3",
-		"@vitejs/plugin-react": "^4.3.4",
-		"@wordpress/scripts": "^30.11.0",
-		"typescript": "^5.7.3",
-		"vite": "^6.1.1",
-		"vite-plugin-dts": "^4.5.0"
+		"@vitejs/plugin-react": "^4.6.0",
+		"@wordpress/scripts": "^30.19.0",
+		"typescript": "^5.8.3",
+		"vite": "^7.0.2",
+		"vite-plugin-dts": "^4.5.4"
 	},
 	"dependencies": {
-		"@wordpress/data": "^10.25.0",
-		"@wordpress/viewport": "^6.25.0"
+		"@wordpress/api-fetch": "^7.26.0",
+		"@wordpress/components": "^29.12.0",
+		"@wordpress/compose": "^7.26.0",
+		"@wordpress/data": "^10.26.0",
+		"@wordpress/hooks": "^4.26.0",
+		"@wordpress/i18n": "^5.26.0",
+		"@wordpress/icons": "^10.26.0",
+		"@wordpress/viewport": "^6.26.0",
+		"@wpmvc/admin-sidebar": "^0.0.4",
+		"@wpmvc/colors": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/colors",
+		"@wpmvc/components": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/components",
+		"@wpmvc/data": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/data",
+		"@wpmvc/fields": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/fields",
+		"react-hot-toast": "^2.5.2",
+		"react-router": "^7.6.3",
+		"styled-components": "^6.1.19"
 	}
 }

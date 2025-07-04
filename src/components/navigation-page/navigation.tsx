@@ -1,0 +1,61 @@
+import { useEffect, useState } from '@wordpress/element';
+import Menu, { MenuItem, MenuItems } from '../menu';
+import { NavigationSection, NavigationWrapper } from './styled';
+import { Fill } from '@wordpress/components';
+import { grid } from '@wordpress/icons';
+import { addAction, doAction, removeAction } from '@wordpress/hooks';
+import WP_HOOKS from '../../constants/wp-hooks';
+import type { Navigation as NavigationProps } from './types';
+
+export default function Navigation( {
+	left,
+	top,
+	width,
+	menuItems,
+}: NavigationProps ) {
+	const [ open, setOpen ] = useState< boolean >( false );
+
+	const menuHandler = ( status: boolean ) => {
+		setOpen( status );
+	};
+
+	useEffect( () => {
+		addAction( WP_HOOKS.RESPONSIVE_SIDEBAR_STATUS, 'wpmvc', menuHandler );
+		return () => {
+			removeAction( WP_HOOKS.RESPONSIVE_SIDEBAR_STATUS, 'wpmvc' );
+		};
+	}, [ menuHandler ] );
+
+	return (
+		<>
+			<Fill name={ 'wpmvc-header-mobile-actions' }>
+				{ () => {
+					return (
+						<MenuItem
+							icon={ grid }
+							onClick={ () => {
+								setOpen( ( prev ) => ! prev );
+								doAction(
+									WP_HOOKS.HEADER_RESPONSIVE_MENU_STATUS,
+									false
+								);
+							} }
+						/>
+					);
+				} }
+			</Fill>
+			<NavigationWrapper
+				$left={ left }
+				$top={ top }
+				$open={ open }
+				$width={ width }
+			>
+				<NavigationSection>
+					<Menu>
+						<MenuItems menuItems={ menuItems } />
+					</Menu>
+				</NavigationSection>
+			</NavigationWrapper>
+		</>
+	);
+}
