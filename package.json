@@ -59,9 +59,9 @@
 		"@wordpress/viewport": "^6.26.0",
 		"@wpmvc/admin-sidebar": "^0.0.4",
 		"@wpmvc/colors": "^0.0.1",
-		"@wpmvc/components": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/components",
-		"@wpmvc/data": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/data",
-		"@wpmvc/fields": "link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/fields",
+		"@wpmvc/components": "^0.0.2",
+		"@wpmvc/data": "^0.0.1",
+		"@wpmvc/fields": "^0.0.23",
 		"react-hot-toast": "^2.5.2",
 		"react-router": "^7.6.3",
 		"styled-components": "^6.1.19"
