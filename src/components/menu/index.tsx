@@ -13,8 +13,8 @@ import { useDashboardRouting } from '../../hooks/use-dashboard-routing';
 import { MenuItemProps, MenuItemsProps, MenuProps } from './types';
 import WP_HOOKS from '../../constants/wp-hooks';
 
-export function MenuItems( { menuItems }: MenuItemsProps ) {
-	return Object.entries( menuItems ).map( ( [ key, item ] ) => (
+export function MenuItems( { items }: MenuItemsProps ) {
+	return Object.entries( items ).map( ( [ key, item ] ) => (
 		<Menu.Item { ...item } key={ key }>
 			{ item.label }
 		</Menu.Item>

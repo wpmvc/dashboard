@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { NavigationWrapper as NavigationWrapperProps } from './types';
+import type { NavigationWrapperProps } from './types';
 
 export const NavigationWrapper = styled.nav< NavigationWrapperProps >`
 	position: fixed;

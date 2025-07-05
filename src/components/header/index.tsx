@@ -57,12 +57,12 @@ const Header: React.FC< HeaderProps > = ( { left, top, menuItems } ) => {
 							<WordPress />
 						</Logo>
 						<HeaderMenuWrapper>
-							<MenuItems menuItems={ menuItems } />
+							<MenuItems items={ menuItems } />
 						</HeaderMenuWrapper>
 					</HeaderLeft>
 					<HeaderRight>
 						<Menu horizontal>
-							<MenuItems menuItems={ leftMenuItems } />
+							<MenuItems items={ leftMenuItems } />
 						</Menu>
 					</HeaderRight>
 					<MobileActions className="mobile-actions">
@@ -84,10 +84,10 @@ const Header: React.FC< HeaderProps > = ( { left, top, menuItems } ) => {
 			</HeaderWrapper>
 			<ResponsiveMenuWrapper $open={ mobileMenuOpen } $top={ top }>
 				<div className="menu-section">
-					<MenuItems menuItems={ menuItems } />
+					<MenuItems items={ menuItems } />
 				</div>
 				<div className="bottom-actions">
-					<MenuItems menuItems={ leftMenuItems } />
+					<MenuItems items={ leftMenuItems } />
 				</div>
 			</ResponsiveMenuWrapper>
 		</>

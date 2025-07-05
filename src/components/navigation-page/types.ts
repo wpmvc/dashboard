@@ -1,9 +1,11 @@
 import { StoreConfig } from '@wpmvc/data/build-types/types';
 import { MenuItemsType } from '../menu/types';
 
-export type NavigationPage = {
+export type NavigationItemsType = MenuItemsType;
+
+export type NavigationPageProps = {
 	path: string;
-	menuItems: MenuItemsType;
+	items: NavigationItemsType;
 	sidebarWidth?: number;
 	store?: StoreConfig;
 };
@@ -12,14 +14,14 @@ export type BodyProps = {
 	$width: number;
 };
 
-export type Navigation = {
+export type NavigationProps = {
 	width: number;
 	left: number;
 	top: number;
-	menuItems: MenuItemsType;
+	items: NavigationItemsType;
 };
 
-export type NavigationWrapper = {
+export type NavigationWrapperProps = {
 	$width: number;
 	$left?: number;
 	$top?: number;

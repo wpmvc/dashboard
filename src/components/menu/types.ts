@@ -20,5 +20,5 @@ export type MenuProps = {
 };
 
 export type MenuItemsProps = {
-	menuItems: MenuItemsType;
+	items: MenuItemsType;
 };

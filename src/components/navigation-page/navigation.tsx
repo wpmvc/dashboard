@@ -5,13 +5,13 @@ import { Fill } from '@wordpress/components';
 import { grid } from '@wordpress/icons';
 import { addAction, doAction, removeAction } from '@wordpress/hooks';
 import WP_HOOKS from '../../constants/wp-hooks';
-import type { Navigation as NavigationProps } from './types';
+import type { NavigationProps } from './types';
 
 export default function Navigation( {
 	left,
 	top,
 	width,
-	menuItems,
+	items,
 }: NavigationProps ) {
 	const [ open, setOpen ] = useState< boolean >( false );
 
@@ -52,7 +52,7 @@ export default function Navigation( {
 			>
 				<NavigationSection>
 					<Menu>
-						<MenuItems menuItems={ menuItems } />
+						<MenuItems items={ items } />
 					</Menu>
 				</NavigationSection>
 			</NavigationWrapper>

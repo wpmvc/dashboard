@@ -1,14 +1,24 @@
+/**
+ * Wordpress dependencies
+ */
+import { useMemo } from '@wordpress/element';
+
+/**
+ * External dependencies
+ */
 import styled from 'styled-components';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { registerValuesStore } from '@wpmvc/data';
+import { values } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
 import { useLayout } from '../../hooks/use-layout';
 import Navigation from './navigation';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import type { BodyProps, NavigationPage } from './types';
-import { registerValuesStore } from '@wpmvc/data';
+import type { BodyProps, NavigationItemsType, NavigationPageProps } from './types';
 import { useDashboardRouting } from '../../hooks';
-import { useMemo } from '@wordpress/element';
 import PageTransition from '../page-transition';
-import { MenuItemsType } from '../menu/types';
-import { values } from 'lodash';
 import { normalizePath } from '../../utils';
 
 const Body = styled.div< BodyProps >`
@@ -20,7 +30,7 @@ const Body = styled.div< BodyProps >`
 `;
 
 // Recursively create routes
-const renderRoutes = ( items: MenuItemsType ) => {
+const renderRoutes = ( items: NavigationItemsType ) => {
 	return Object.entries( items || {} ).map( ( [ key, item ] ) => {
 		return (
 			<Route
@@ -38,33 +48,33 @@ const renderRoutes = ( items: MenuItemsType ) => {
 
 export default function NavigationPage( {
 	path,
-	menuItems,
+	items,
 	sidebarWidth = 280,
 	store,
-}: NavigationPage ) {
+}: NavigationPageProps ) {
 	if ( store ) {
 		registerValuesStore( store );
 	}
 
 	const RedirectSettings = () => {
 		useDashboardRouting().navigate?.(
-			`${ path }/${ values( menuItems )[ 0 ].path }`
+			`${ path }/${ values( items )[ 0 ].path }`
 		);
 		return null;
 	};
 
 	const { left, top } = useLayout();
 
-	const normalizedItems: MenuItemsType = useMemo( () => {
-		const result: MenuItemsType = {};
-		Object.entries( menuItems || {} ).forEach( ( [ key, item ] ) => {
+	const normalizedItems: NavigationItemsType = useMemo( () => {
+		const result: NavigationItemsType = {};
+		Object.entries( items || {} ).forEach( ( [ key, item ] ) => {
 			result[ key ] = {
 				...item,
 				path: `/${ path }/${ normalizePath( item.path ) }`,
 			};
 		} );
 		return result;
-	}, [ menuItems ] );
+	}, [ items ] );
 
 	return (
 		<>
@@ -72,12 +82,12 @@ export default function NavigationPage( {
 				left={ left }
 				top={ top }
 				width={ sidebarWidth }
-				menuItems={ normalizedItems }
+				items={ normalizedItems }
 			/>
 			<Body $width={ sidebarWidth }>
 				<Routes>
 					<Route path="/" element={ <RedirectSettings /> } />
-					{ renderRoutes( menuItems ) }
+					{ renderRoutes( items ) }
 					<Route path="*" element={ <Outlet /> } />
 				</Routes>
 			</Body>
