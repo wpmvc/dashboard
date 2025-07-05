@@ -29,7 +29,7 @@ const renderNestedRoutes = ( routes: RouteType[] ) => {
 				key={ route.path }
 				path={ normalizePath( route.path ) }
 				element={
-					route.children ? (
+					route.children || route?.preventTransition ? (
 						route.element
 					) : (
 						<PageTransition key={ route.path }>

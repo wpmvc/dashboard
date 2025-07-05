@@ -17,6 +17,7 @@ export type RouteType = {
 	element: React.ReactNode;
 	children?: RouteType[];
 	index?: boolean;
+	preventTransition?: boolean;
 };
 
 export type DashboardProps = {

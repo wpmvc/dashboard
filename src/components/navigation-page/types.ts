@@ -2,6 +2,7 @@ import { StoreConfig } from '@wpmvc/data/build-types/types';
 import { MenuItemsType } from '../menu/types';
 
 export type NavigationPage = {
+	path: string;
 	menuItems: MenuItemsType;
 	sidebarWidth?: number;
 	store?: StoreConfig;
