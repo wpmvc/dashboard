@@ -1,4 +1,4 @@
-import { dispatch } from '@wordpress/data';
+import { dispatch, useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 
 import { useAdminSidebarLayout } from '@wpmvc/admin-sidebar';
@@ -7,12 +7,13 @@ import styled from 'styled-components';
 
 import { ColorWrapper } from '@wpmvc/colors';
 import Header from '../header';
-import { Layout, WrapperProps } from './types';
+import { WrapperProps } from './types';
 import { StyledWrapper } from './styles';
 
-const Body = styled.div< Layout >`
+const Body = styled.div< { $isHeaderHidden: boolean } >`
 	position: relative;
-	padding-top: var( --wpmvc-header-height );
+	${ ( { $isHeaderHidden } ) =>
+		$isHeaderHidden ? '' : 'padding-top: var( --wpmvc-header-height );' }
 `;
 
 export default function Wrapper( { menuItems }: WrapperProps ) {
@@ -34,11 +35,18 @@ export default function Wrapper( { menuItems }: WrapperProps ) {
 		dispatch( 'my-dashboard/global' ).setTop( top );
 	}, [ left, top ] );
 
+	const isHeaderHidden = useSelect( ( select ) => {
+		//@ts-ignore
+		return select( 'my-dashboard/global' ).getHideHeader();
+	}, [] );
+
 	return (
 		<ColorWrapper>
 			<StyledWrapper $top={ top } $left={ left }>
-				<Body $top={ top }>
+				{ ! isHeaderHidden && (
 					<Header left={ left } top={ top } menuItems={ menuItems } />
+				) }
+				<Body $isHeaderHidden={ isHeaderHidden }>
 					<Outlet />
 				</Body>
 			</StyledWrapper>

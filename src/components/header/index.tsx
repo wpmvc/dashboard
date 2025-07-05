@@ -50,46 +50,73 @@ const Header: React.FC< HeaderProps > = ( { left, top, menuItems } ) => {
 
 	return (
 		<>
-			<HeaderWrapper $left={ left } $top={ top }>
-				<HeaderContent>
-					<HeaderLeft>
-						<Logo>
-							<WordPress />
-						</Logo>
-						<HeaderMenuWrapper>
-							<MenuItems items={ menuItems } />
-						</HeaderMenuWrapper>
-					</HeaderLeft>
-					<HeaderRight>
-						<Menu horizontal>
-							<MenuItems items={ leftMenuItems } />
-						</Menu>
-					</HeaderRight>
-					<MobileActions className="mobile-actions">
-						<Menu horizontal>
-							<Slot name={ 'wpmvc-header-mobile-actions' } />
-							<Menu.Item
-								icon={ menu }
-								onClick={ () => {
-									setMobileMenuOpen( ( prev ) => ! prev );
-									doAction(
-										WP_HOOKS.RESPONSIVE_SIDEBAR_STATUS,
-										false
-									);
-								} }
-							/>
-						</Menu>
-					</MobileActions>
-				</HeaderContent>
-			</HeaderWrapper>
-			<ResponsiveMenuWrapper $open={ mobileMenuOpen } $top={ top }>
-				<div className="menu-section">
-					<MenuItems items={ menuItems } />
-				</div>
-				<div className="bottom-actions">
-					<MenuItems items={ leftMenuItems } />
-				</div>
-			</ResponsiveMenuWrapper>
+			<Slot name="wpmvc-header">
+				{ ( fills: any ) => {
+					if ( fills.length ) {
+						return (
+							<HeaderWrapper $left={ left } $top={ top }>
+								{ fills }
+							</HeaderWrapper>
+						);
+					}
+
+					return (
+						<>
+							<HeaderWrapper $left={ left } $top={ top }>
+								<HeaderContent>
+									<HeaderLeft>
+										<Logo>
+											<WordPress />
+										</Logo>
+										<HeaderMenuWrapper>
+											<MenuItems items={ menuItems } />
+										</HeaderMenuWrapper>
+									</HeaderLeft>
+									<HeaderRight>
+										<Menu horizontal>
+											<MenuItems
+												items={ leftMenuItems }
+											/>
+										</Menu>
+									</HeaderRight>
+									<MobileActions className="mobile-actions">
+										<Menu horizontal>
+											<Slot
+												name={
+													'wpmvc-header-mobile-actions'
+												}
+											/>
+											<Menu.Item
+												icon={ menu }
+												onClick={ () => {
+													setMobileMenuOpen(
+														( prev ) => ! prev
+													);
+													doAction(
+														WP_HOOKS.RESPONSIVE_SIDEBAR_STATUS,
+														false
+													);
+												} }
+											/>
+										</Menu>
+									</MobileActions>
+								</HeaderContent>
+							</HeaderWrapper>
+							<ResponsiveMenuWrapper
+								$open={ mobileMenuOpen }
+								$top={ top }
+							>
+								<div className="menu-section">
+									<MenuItems items={ menuItems } />
+								</div>
+								<div className="bottom-actions">
+									<MenuItems items={ leftMenuItems } />
+								</div>
+							</ResponsiveMenuWrapper>
+						</>
+					);
+				} }
+			</Slot>
 		</>
 	);
 };

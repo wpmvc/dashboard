@@ -16,7 +16,11 @@ import { values } from 'lodash';
  */
 import { useLayout } from '../../hooks/use-layout';
 import Navigation from './navigation';
-import type { BodyProps, NavigationItemsType, NavigationPageProps } from './types';
+import type {
+	BodyProps,
+	NavigationItemsType,
+	NavigationPageProps,
+} from './types';
 import { useDashboardRouting } from '../../hooks';
 import PageTransition from '../page-transition';
 import { normalizePath } from '../../utils';

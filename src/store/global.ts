@@ -6,11 +6,13 @@ type GlobalStoreState = {
 	navigate?: NavigateFunction;
 	top: string;
 	left: string;
+	hideHeader: boolean;
 };
 
 const DEFAULT_STATE: GlobalStoreState = {
 	top: '0px',
 	left: '0px',
+	hideHeader: true,
 };
 
 export default function registerGlobalStore() {
@@ -37,10 +39,16 @@ export default function registerGlobalStore() {
 						...state,
 						top: action.payload,
 					};
+				case 'SET_HIDE_HEADER':
+					return {
+						...state,
+						hideHeader: action.payload,
+					};
 				default:
 					return state;
 			}
 		},
+
 		actions: {
 			setLocation( location: Location ) {
 				return {
@@ -72,7 +80,14 @@ export default function registerGlobalStore() {
 					payload: right,
 				};
 			},
+			setHideHeader( hide: boolean ) {
+				return {
+					type: 'SET_HIDE_HEADER',
+					payload: hide,
+				};
+			},
 		},
+
 		selectors: {
 			getLocation( state = DEFAULT_STATE ) {
 				return state.location;
@@ -85,6 +100,9 @@ export default function registerGlobalStore() {
 			},
 			getLeft( state = DEFAULT_STATE ) {
 				return state.left;
+			},
+			getHideHeader( state = DEFAULT_STATE ) {
+				return state.hideHeader;
 			},
 		},
 	} );

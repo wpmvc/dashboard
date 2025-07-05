@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import type { NavigationWrapperProps } from './types';
 
-export const NavigationWrapper = styled.nav< NavigationWrapperProps >`
+export const NavigationWrapper = styled.nav<
+	NavigationWrapperProps & { $isHeaderHidden: boolean }
+>`
 	position: fixed;
 	bottom: 0;
 	left: ${ ( { $left } ) => `${ $left }px` };
-	height: ${ ( { $top } ) =>
-		`calc(100vh - (var( --wpmvc-header-height ) + ${ $top }px) - 1px)` };
+
+	height: ${ ( { $top, $isHeaderHidden } ) =>
+		$isHeaderHidden
+			? `calc(100vh - ${ $top }px - 1px)`
+			: `calc(100vh - (var(--wpmvc-header-height) + ${ $top }px) - 1px)` };
+
 	width: ${ ( { $width } ) => `${ $width }px` };
 	background: var( --wpmvc-background-light );
 	// box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.1 );

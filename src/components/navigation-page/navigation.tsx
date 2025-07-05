@@ -6,6 +6,7 @@ import { grid } from '@wordpress/icons';
 import { addAction, doAction, removeAction } from '@wordpress/hooks';
 import WP_HOOKS from '../../constants/wp-hooks';
 import type { NavigationProps } from './types';
+import { useSelect } from '@wordpress/data';
 
 export default function Navigation( {
 	left,
@@ -25,6 +26,11 @@ export default function Navigation( {
 			removeAction( WP_HOOKS.RESPONSIVE_SIDEBAR_STATUS, 'wpmvc' );
 		};
 	}, [ menuHandler ] );
+
+	const isHeaderHidden = useSelect( ( select ) => {
+		//@ts-ignore
+		return select( 'my-dashboard/global' ).getHideHeader();
+	}, [] );
 
 	return (
 		<>
@@ -49,6 +55,7 @@ export default function Navigation( {
 				$top={ top }
 				$open={ open }
 				$width={ width }
+				$isHeaderHidden={ isHeaderHidden }
 			>
 				<NavigationSection>
 					<Menu>

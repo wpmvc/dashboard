@@ -18,6 +18,7 @@ export type RouteType = {
 	children?: RouteType[];
 	index?: boolean;
 	preventTransition?: boolean;
+	hideHeader?: boolean;
 };
 
 export type DashboardProps = {

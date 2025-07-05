@@ -1,6 +1,6 @@
 import { SlotFillProvider } from '@wordpress/components';
 import { ColorVariables } from '@wpmvc/colors';
-import { HashRouter, Route, Routes } from 'react-router';
+import { HashRouter, Route, Routes, useLocation } from 'react-router';
 import GlobalStyle from '../../global-style';
 import { registerGlobalStore } from '../../store';
 import Notification from '../notification';
@@ -8,6 +8,26 @@ import PageTransition from '../page-transition';
 import Wrapper from './wrapper';
 import { DashboardProps, RouteType } from './types';
 import { normalizePath } from '../../utils';
+import { ReactNode } from 'react';
+import { useEffect } from '@wordpress/element';
+import { dispatch } from '@wordpress/data';
+
+const Page = ( {
+	route,
+	children,
+}: {
+	route: RouteType;
+	children: ReactNode;
+} ) => {
+	const location = useLocation();
+	useEffect( () => {
+		//@ts-ignore
+		dispatch( 'my-dashboard/global' ).setHideHeader(
+			route?.hideHeader ? true : false
+		);
+	}, [ location.pathname ] );
+	return children;
+};
 
 const renderNestedRoutes = ( routes: RouteType[] ) => {
 	return routes.map( ( route ) => {
@@ -18,7 +38,7 @@ const renderNestedRoutes = ( routes: RouteType[] ) => {
 					index
 					element={
 						<PageTransition key={ route.path }>
-							{ route.element }
+							<Page route={ route }>{ route.element }</Page>
 						</PageTransition>
 					}
 				/>
@@ -30,10 +50,10 @@ const renderNestedRoutes = ( routes: RouteType[] ) => {
 				path={ normalizePath( route.path ) }
 				element={
 					route.children || route?.preventTransition ? (
-						route.element
+						<Page route={ route }>{ route.element }</Page>
 					) : (
 						<PageTransition key={ route.path }>
-							{ route.element }
+							<Page route={ route }>{ route.element }</Page>
 						</PageTransition>
 					)
 				}
