@@ -50,11 +50,12 @@ export default function Dashboard( {
 	routes = [],
 	menuItems,
 	children,
+	colors,
 }: DashboardProps ) {
 	return (
 		<SlotFillProvider>
 			<GlobalStyle />
-			<ColorVariables />
+			<ColorVariables colors={ colors } />
 			<Notification />
 			<HashRouter>
 				<Routes>

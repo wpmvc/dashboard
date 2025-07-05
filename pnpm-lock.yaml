@@ -6,7 +6,6 @@ settings:
 
 overrides:
   '@wpmvc/fields': link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/fields
-  '@wpmvc/colors': link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/colors
   '@wpmvc/data': link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/data
   '@wpmvc/components': link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/components
 
@@ -45,8 +44,8 @@ importers:
         specifier: ^0.0.4
         version: 0.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@wpmvc/colors':
-        specifier: link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/colors
-        version: link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/colors
+        specifier: ^0.0.1
+        version: 0.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@wpmvc/components':
         specifier: link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/components
         version: link:../../../../../../../Library/pnpm/global/5/node_modules/@wpmvc/components
@@ -2496,6 +2495,9 @@ packages:
   '@wpmvc/admin-sidebar@0.0.4':
     resolution: {integrity: sha512-KglWUTPTjYxKo45pu7bLZxBdxkKrW+p+bICDi6SOdk0CAXUhKEhCtlKcFsvL20H93vygjrc9JNKbl+wrIgIjVg==}
 
+  '@wpmvc/colors@0.0.1':
+    resolution: {integrity: sha512-9uuvV4xwui6rumgOQjUpdpqAxZRNuLd3//e6UHtF1Sxqu8dxmZd5xapYeqN75ef9A+H3wmV5cw/LVicH5h65wQ==}
+
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
 
@@ -4317,6 +4319,9 @@ packages:
 
   image-ssim@0.2.0:
     resolution: {integrity: sha512-W7+sO6/yhxy83L0G7xR8YAc5Z5QFtYEXXRV6EaE8tuYBZJnA3gVgp3q7X7muhLZVodeb9UfvjSbwt9VJwjIYAg==}
+
+  immer@10.1.1:
+    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
   immutable@5.1.3:
     resolution: {integrity: sha512-+chQdDfvscSF1SJqv2gn4SRO2ZyS3xL3r7IW/wWEEzrzLisnOlKiQu5ytC/BVNcS15C39WT2Hg/bjKjDMcu+zg==}
@@ -10398,6 +10403,16 @@ snapshots:
       - react
       - react-dom
 
+  '@wpmvc/colors@0.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@wordpress/data': 10.26.0(react@18.3.1)
+      '@wordpress/element': 6.26.0
+      immer: 10.1.1
+      styled-components: 6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
@@ -12500,6 +12515,8 @@ snapshots:
   ignore@7.0.5: {}
 
   image-ssim@0.2.0: {}
+
+  immer@10.1.1: {}
 
   immutable@5.1.3: {}
 
