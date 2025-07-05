@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useDashboardRouting } from '../../hooks';
 
 const fadeIn = keyframes`
     from {
@@ -13,8 +15,20 @@ const fadeIn = keyframes`
     }
 `;
 
-const PageTransition = styled.div`
-	animation: ${ fadeIn } 0.45s;
+const PageTransitionWrapper = styled.div`
+	animation: ${ fadeIn } 0.45s ease;
 `;
 
-export default PageTransition;
+export default function PageTransition( {
+	children,
+}: {
+	children: React.ReactNode;
+} ) {
+	const { location } = useDashboardRouting();
+
+	useEffect( () => {
+		window.scrollTo( { top: 0, behavior: 'smooth' } );
+	}, [ location?.pathname ] );
+
+	return <PageTransitionWrapper>{ children }</PageTransitionWrapper>;
+}
