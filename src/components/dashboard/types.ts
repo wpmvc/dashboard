@@ -1,9 +1,8 @@
 import { ColorPaletteOverride } from '@wpmvc/colors/build-types/store/types';
-import { MenuItemsType } from '../menu/types';
+import { ReactNode } from 'react';
+import { Header } from '../header/types';
 
-export type WrapperProps = {
-	menuItems: MenuItemsType;
-};
+export type WrapperProps = Header;
 
 export type Layout = {
 	$top: number;
@@ -23,7 +22,7 @@ export type RouteType = {
 
 export type DashboardProps = {
 	routes?: RouteType[];
-	children?: React.ReactNode;
-	menuItems: MenuItemsType;
+	children?: ReactNode;
 	colors?: ColorPaletteOverride;
+	header?: Header;
 };

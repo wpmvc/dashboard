@@ -16,7 +16,7 @@ const Body = styled.div< { $isHeaderHidden: boolean } >`
 		$isHeaderHidden ? '' : 'padding-top: var( --wpmvc-header-height );' }
 `;
 
-export default function Wrapper( { menuItems }: WrapperProps ) {
+export default function Wrapper( props: WrapperProps ) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { left, top } = useAdminSidebarLayout();
@@ -44,7 +44,7 @@ export default function Wrapper( { menuItems }: WrapperProps ) {
 		<ColorWrapper>
 			<StyledWrapper $top={ top } $left={ left }>
 				{ ! isHeaderHidden && (
-					<Header left={ left } top={ top } menuItems={ menuItems } />
+					<Header { ...props } left={ left } top={ top } />
 				) }
 				<Body $isHeaderHidden={ isHeaderHidden }>
 					<Outlet />

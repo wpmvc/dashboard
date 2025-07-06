@@ -68,9 +68,9 @@ registerGlobalStore();
 
 export default function Dashboard( {
 	routes = [],
-	menuItems,
 	children,
 	colors,
+	header,
 }: DashboardProps ) {
 	return (
 		<SlotFillProvider>
@@ -79,7 +79,7 @@ export default function Dashboard( {
 			<Notification />
 			<HashRouter>
 				<Routes>
-					<Route element={ <Wrapper menuItems={ menuItems } /> }>
+					<Route element={ <Wrapper { ...header } /> }>
 						{ children }
 						{ renderNestedRoutes( routes ) }
 					</Route>
