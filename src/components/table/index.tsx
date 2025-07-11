@@ -148,35 +148,42 @@ export default function Table( {
 
 	const processedColumns = useMemo( () => {
 		return columns.map( ( column ) => {
-			if ( column.isStatus ) {
-				const { render } = column;
-				column.render = ( { item }: any ) => {
+			if ( ! column.isStatus ) {
+				return column;
+			}
+
+			const { render } = column;
+			return {
+				...column,
+				render: ( { item }: any ) => {
 					const [ isLoading, setIsLoading ] = useState( false );
+
 					const onChange = async ( value: boolean ) => {
 						setIsLoading( true );
+						
 						try {
 							await apiFetch( {
 								path: `${ path }/${ item.id }/${ column.id }`,
 								method: 'POST',
 								data: { value },
 							} );
+
 							updateItem( item.id, {
 								...item,
 								[ column.id ]: value,
 							} );
 						} catch ( error ) {
-							console.error( error );
+							console.error( 'Failed to update status:', error );
 						} finally {
 							setIsLoading( false );
 						}
 					};
 
 					return render( { item, onChange, isLoading } );
-				};
-			}
-			return column;
+				}
+			};
 		} );
-	}, [ columns, updateItem ] );
+	}, [ columns, updateItem, path ] );
 
 	return (
 		<>
