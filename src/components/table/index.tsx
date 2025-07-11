@@ -9,6 +9,7 @@
  */
 import { Card } from '@wordpress/components';
 import { useMemo, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 import { useInstanceId } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 
@@ -102,12 +103,11 @@ export default function Table( {
 		selector: 'get',
 	} );
 
-	const { refresh, resetQueryParamsAndRefresh, store, update } = useCrudStore(
-		{
+	const { refresh, resetQueryParamsAndRefresh, store, update, updateItem } =
+		useCrudStore( {
 			name: storeKey,
 			path,
-		}
-	);
+		} );
 
 	const isEnabledCreate =
 		isUndefined( create?.status ) || create?.status === true;
@@ -145,6 +145,38 @@ export default function Table( {
 	}, [ isEnabledEdit, isEnabledDestroy ] );
 
 	const queryParams = useCrudQueryParams( { name: storeKey } );
+
+	const processedColumns = useMemo( () => {
+		return columns.map( ( column ) => {
+			if ( column.isStatus ) {
+				const { render } = column;
+				column.render = ( { item }: any ) => {
+					const [ isLoading, setIsLoading ] = useState( false );
+					const onChange = async ( value: boolean ) => {
+						setIsLoading( true );
+						try {
+							await apiFetch( {
+								path: `${ path }/${ item.id }/${ column.id }`,
+								method: 'POST',
+								data: { value },
+							} );
+							updateItem( item.id, {
+								...item,
+								[ column.id ]: value,
+							} );
+						} catch ( error ) {
+							console.error( error );
+						} finally {
+							setIsLoading( false );
+						}
+					};
+
+					return render( { item, onChange, isLoading } );
+				};
+			}
+			return column;
+		} );
+	}, [ columns, updateItem ] );
 
 	return (
 		<>
@@ -196,7 +228,7 @@ export default function Table( {
 						items={ data.items ?? [] }
 						total={ data.total ?? 0 }
 						isLoading={ ! isResolved }
-						fields={ columns }
+						fields={ processedColumns }
 						refresh={ refresh }
 						actions={ actions }
 						queryParams={ queryParams }
