@@ -50,6 +50,7 @@ type CRUD = {
 	buttonLabel?: string;
 	okLabel?: string;
 	cancelLabel?: string;
+	onClick?: ( item: any ) => void;
 };
 
 type Destroy = Omit< CRUD, 'fields' > & {
@@ -67,7 +68,6 @@ type TableProps = {
 	path: string;
 	columns: any[];
 	storeName?: string;
-	editFields: FieldsType;
 	create?: Create;
 	edit?: Edit;
 	destroy?: Destroy;
@@ -123,8 +123,13 @@ export default function Table( {
 				id: 'edit',
 				label: create?.buttonLabel ?? __( 'Edit' ),
 				callback: ( items: any[] ) => {
-					const id = parseInt( items[ 0 ]?.id );
-					if ( ! isNaN( id ) ) setEditId( id );
+					const item = items[ 0 ];
+					if ( edit?.onClick ) {
+						edit.onClick( item );
+					} else {
+						const id = parseInt( items[ 0 ]?.id );
+						if ( ! isNaN( id ) ) setEditId( id );
+					}
 				},
 			} );
 		}
@@ -160,7 +165,7 @@ export default function Table( {
 
 					const onChange = async ( value: boolean ) => {
 						setIsLoading( true );
-						
+
 						try {
 							await apiFetch( {
 								path: `${ path }/${ item.id }/${ column.id }`,
@@ -180,7 +185,7 @@ export default function Table( {
 					};
 
 					return render( { item, onChange, isLoading } );
-				}
+				},
 			};
 		} );
 	}, [ columns, updateItem, path ] );
@@ -189,7 +194,7 @@ export default function Table( {
 		<>
 			<StyledCard>
 				<SectionHeader heading={ heading }>
-					{ isEnabledCreate && (
+					{ isEnabledCreate && ! create?.onClick && (
 						<Create
 							store={ store }
 							refresh={ resetQueryParamsAndRefresh }
