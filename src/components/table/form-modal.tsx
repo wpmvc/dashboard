@@ -131,7 +131,7 @@ export default function FormModal( {
 		<Modal
 			isOpen={ isOpen }
 			title={ title }
-			size="small"
+			size="large"
 			isDismissible={ ! isSubmitting }
 			isFullScreen={ isFullScreen }
 			onClose={ handleClose }
