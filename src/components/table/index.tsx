@@ -168,12 +168,12 @@ export default function Table( {
 
 						try {
 							await apiFetch( {
-								path: `${ path }/${ item.id ?? item.ID }/${ column.id }`,
+								path: `${ path }/${ item?.id ?? item?.ID }/${ column.id }`,
 								method: 'POST',
 								data: { value },
 							} );
 
-							updateItem( item.id ?? item.ID, {
+							updateItem( item?.id ?? item?.ID, {
 								...item,
 								[ column.id ]: value,
 							} );
