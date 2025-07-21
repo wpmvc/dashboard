@@ -127,7 +127,7 @@ export default function Table( {
 					if ( edit?.onClick ) {
 						edit.onClick( item );
 					} else {
-						const id = parseInt( items[ 0 ]?.id );
+						const id = parseInt( items[ 0 ]?.id ?? items[ 0 ]?.ID );
 						if ( ! isNaN( id ) ) setEditId( id );
 					}
 				},
@@ -140,7 +140,7 @@ export default function Table( {
 				label: destroy?.buttonLabel ?? __( 'Delete' ),
 				isDestructive: true,
 				callback: ( items: any[] ) => {
-					const id = parseInt( items[ 0 ]?.id );
+					const id = parseInt( items[ 0 ]?.id ?? items[ 0 ]?.ID );
 					if ( ! isNaN( id ) ) setDeleteId( id );
 				},
 			} );
@@ -168,12 +168,12 @@ export default function Table( {
 
 						try {
 							await apiFetch( {
-								path: `${ path }/${ item.id }/${ column.id }`,
+								path: `${ path }/${ item.id ?? item.ID }/${ column.id }`,
 								method: 'POST',
 								data: { value },
 							} );
 
-							updateItem( item.id, {
+							updateItem( item.id ?? item.ID, {
 								...item,
 								[ column.id ]: value,
 							} );
