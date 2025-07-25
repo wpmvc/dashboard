@@ -86,6 +86,7 @@ export default function Table( {
 	create,
 	destroy,
 	edit,
+	...props
 }: TableProps ) {
 	const instanceId = useInstanceId( Table, 'wpmvc-dashboard-table' );
 	const storeKey = storeName || instanceId;
@@ -237,6 +238,7 @@ export default function Table( {
 				) }
 				<Card style={ { borderRadius: 4, overflow: 'hidden' } }>
 					<TableComponent
+						{...props}
 						items={ data.items ?? [] }
 						total={ data.total ?? 0 }
 						isLoading={ ! isResolved }
