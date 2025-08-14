@@ -34,6 +34,7 @@ import Edit from './edit';
 import Delete from './delete';
 import { FieldsType } from '@wpmvc/fields/build-types/types/field';
 import { isUndefined } from 'lodash';
+import { Layout } from '@wpmvc/components/build-types/gutenberg/table/types';
 
 /**
  * Styled wrapper for the table card
@@ -71,6 +72,16 @@ type TableProps = {
 	create?: Create;
 	edit?: Edit;
 	destroy?: Destroy;
+	layoutType?: string;
+	layout?: Layout;
+	layouts?: {
+		table?: {
+			layout: Layout;
+		};
+		grid?: {
+			layout: Layout;
+		};
+	};
 };
 
 /**

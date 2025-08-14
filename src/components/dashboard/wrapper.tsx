@@ -1,7 +1,10 @@
 import { dispatch, useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 
-import { useActiveAdminMenu, useAdminSidebarLayout } from '@wpmvc/admin-sidebar';
+import {
+	useActiveAdminMenu,
+	useAdminSidebarLayout,
+} from '@wpmvc/admin-sidebar';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
