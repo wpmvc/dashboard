@@ -1,8 +1,8 @@
 import { dispatch, useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 
-import { useAdminSidebarLayout } from '@wpmvc/admin-sidebar';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useActiveAdminMenu, useAdminSidebarLayout } from '@wpmvc/admin-sidebar';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ColorWrapper } from '@wpmvc/colors';
@@ -20,6 +20,13 @@ export default function Wrapper( props: WrapperProps ) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { left, top } = useAdminSidebarLayout();
+
+	useActiveAdminMenu( {
+		pageTopLevelID: props.pageTopLevelID,
+		rootPaths: props.rootPaths,
+		navigate,
+		location,
+	} );
 
 	useEffect( () => {
 		//@ts-ignore

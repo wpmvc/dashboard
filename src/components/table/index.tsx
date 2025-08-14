@@ -169,7 +169,9 @@ export default function Table( {
 
 						try {
 							await apiFetch( {
-								path: `${ path }/${ item?.id ?? item?.ID }/${ column.id }`,
+								path: `${ path }/${ item?.id ?? item?.ID }/${
+									column.id
+								}`,
 								method: 'POST',
 								data: { value },
 							} );
@@ -238,7 +240,7 @@ export default function Table( {
 				) }
 				<Card style={ { borderRadius: 4, overflow: 'hidden' } }>
 					<TableComponent
-						{...props}
+						{ ...props }
 						items={ data.items ?? [] }
 						total={ data.total ?? 0 }
 						isLoading={ ! isResolved }

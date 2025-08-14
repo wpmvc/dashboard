@@ -1,6 +1,6 @@
 import { SlotFillProvider } from '@wordpress/components';
 import { ColorVariables } from '@wpmvc/colors';
-import { HashRouter, Route, Routes, useLocation } from 'react-router';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import GlobalStyle from '../../global-style';
 import { registerGlobalStore } from '../../store';
 import Notification from '../notification';
@@ -71,6 +71,8 @@ export default function Dashboard( {
 	children,
 	colors,
 	header,
+	pageTopLevelID,
+	rootPaths,
 }: DashboardProps ) {
 	return (
 		<SlotFillProvider>
@@ -79,7 +81,15 @@ export default function Dashboard( {
 			<Notification />
 			<HashRouter>
 				<Routes>
-					<Route element={ <Wrapper { ...header } /> }>
+					<Route
+						element={
+							<Wrapper
+								{ ...header }
+								pageTopLevelID={ pageTopLevelID }
+								rootPaths={ rootPaths }
+							/>
+						}
+					>
 						{ children }
 						{ renderNestedRoutes( routes ) }
 					</Route>

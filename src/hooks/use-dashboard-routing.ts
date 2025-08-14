@@ -1,5 +1,5 @@
 import { useSelect } from '@wordpress/data';
-import type { Location } from 'react-router';
+import type { Location } from 'react-router-dom';
 
 /**
  * Hook to get location and navigate from the global dashboard store.

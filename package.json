@@ -34,8 +34,7 @@
 	"peerDependencies": {
 		"@wordpress/element": "^6.18.0",
 		"react": "^18.0.0",
-		"react-dom": "^18.0.0",
-		"react-router-dom": "^7.4.1"
+		"react-dom": "^18.0.0"
 	},
 	"devDependencies": {
 		"@types/lodash": "^4.17.20",
@@ -63,7 +62,7 @@
 		"@wpmvc/data": "^0.0.11",
 		"@wpmvc/fields": "^0.0.25",
 		"react-hot-toast": "^2.5.2",
-		"react-router": "^7.7.1",
+		"react-router-dom": "^7.4.1",
 		"styled-components": "^6.1.19"
 	}
 }

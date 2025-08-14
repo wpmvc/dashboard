@@ -2,7 +2,10 @@ import { ColorPaletteOverride } from '@wpmvc/colors/build-types/store/types';
 import { ReactNode } from 'react';
 import { Header } from '../header/types';
 
-export type WrapperProps = Header;
+export type WrapperProps = Header & {
+	pageTopLevelID: string;
+	rootPaths: string[];
+};
 
 export type Layout = {
 	$top: number;
@@ -25,4 +28,6 @@ export type DashboardProps = {
 	children?: ReactNode;
 	colors?: ColorPaletteOverride;
 	header?: Header;
+	pageTopLevelID: string;
+	rootPaths: string[];
 };

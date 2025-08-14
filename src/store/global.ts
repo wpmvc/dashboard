@@ -1,5 +1,5 @@
 import { createReduxStore, register } from '@wordpress/data';
-import type { NavigateFunction, Location } from 'react-router';
+import type { NavigateFunction, Location } from 'react-router-dom';
 
 type GlobalStoreState = {
 	location?: Location;
