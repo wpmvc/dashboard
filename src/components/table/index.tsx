@@ -52,6 +52,7 @@ type CRUD = {
 	okLabel?: string;
 	cancelLabel?: string;
 	onClick?: ( item: any ) => void;
+	onSuccess?: ( response: any ) => void;
 };
 
 type Destroy = Omit< CRUD, 'fields' > & {
@@ -115,11 +116,17 @@ export default function Table( {
 		selector: 'get',
 	} );
 
-	const { refresh, resetQueryParamsAndRefresh, store, update, updateItem } =
-		useCrudStore( {
-			name: storeKey,
-			path,
-		} );
+	const {
+		refresh,
+		resetQueryParamsAndRefresh,
+		create: createStore,
+		update,
+		updateItem,
+		destroy: destroyItem,
+	} = useCrudStore( {
+		name: storeKey,
+		path,
+	} );
 
 	const isEnabledCreate =
 		isUndefined( create?.status ) || create?.status === true;
@@ -210,8 +217,7 @@ export default function Table( {
 				<SectionHeader heading={ heading }>
 					{ isEnabledCreate && ! create?.onClick && (
 						<Create
-							store={ store }
-							refresh={ resetQueryParamsAndRefresh }
+							onSubmit={ createStore }
 							fields={ create?.fields ?? {} }
 							addNewLabel={
 								create?.buttonLabel ?? __( 'Add New' )
@@ -221,32 +227,36 @@ export default function Table( {
 							cancelLabel={
 								create?.cancelLabel ?? __( 'Cancel' )
 							}
+							onSuccess={ ( response ) => {
+								create?.onSuccess?.( response );
+								resetQueryParamsAndRefresh();
+							} }
 						/>
 					) }
 				</SectionHeader>
 				{ isEnabledEdit && (
 					<Edit
 						path={ path }
-						update={ update }
-						refresh={ refresh }
+						onSubmit={ update }
 						fields={ edit?.fields ?? {} }
 						editId={ editId }
 						setEditId={ setEditId }
 						title={ edit?.title ?? __( 'Edit Item' ) }
 						okLabel={ edit?.okLabel ?? __( 'Save' ) }
 						cancelLabel={ edit?.cancelLabel ?? __( 'Cancel' ) }
+						onSuccess={ edit?.onSuccess }
 					/>
 				) }
 				{ isEnabledDestroy && (
 					<Delete
-						path={ path }
-						refresh={ refresh }
 						id={ deleteId }
 						setId={ setDeleteId }
+						onSubmit={ destroyItem }
 						title={ destroy?.title ?? __( 'Delete Item' ) }
 						okLabel={ destroy?.okLabel ?? __( 'Delete' ) }
 						cancelLabel={ destroy?.cancelLabel ?? __( 'Cancel' ) }
 						message={ destroy?.message }
+						onSuccess={ destroy?.onSuccess }
 					/>
 				) }
 				<Card style={ { borderRadius: 4, overflow: 'hidden' } }>

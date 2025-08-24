@@ -26,10 +26,10 @@ type CreateModalProps = {
 	title: string;
 	okLabel: string;
 	cancelLabel: string;
-	store: (
+	onSubmit: (
 		attributes: Record< string, any >
 	) => Promise< { message: string } >;
-	refresh: () => void;
+	onSuccess?: ( response: any ) => void;
 };
 
 /**
@@ -42,8 +42,8 @@ export default function CreateModal( {
 	title,
 	okLabel,
 	cancelLabel,
-	store,
-	refresh,
+	onSubmit,
+	onSuccess,
 }: CreateModalProps ) {
 	const [ attributes, setAttributes, resetAttributes ] = useAttributes( {} );
 
@@ -55,11 +55,11 @@ export default function CreateModal( {
 			cancelLabel={ cancelLabel }
 			fields={ fields }
 			onClose={ closeModal }
-			onSubmit={ store }
-			refresh={ refresh }
+			onSubmit={ onSubmit }
 			attributes={ attributes }
 			setAttributes={ setAttributes }
 			resetAttributes={ resetAttributes }
+			onSuccess={ onSuccess }
 		/>
 	);
 }

@@ -9,7 +9,6 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
 
 /**
  * External Dependencies
@@ -38,9 +37,9 @@ const FooterActions = styled.div`
  */
 type DeleteModalProps = {
 	id: number;
-	path: string;
 	setId: React.Dispatch< React.SetStateAction< number > >;
-	refresh: () => void;
+	onSubmit: ( id: number ) => Promise< { message: string } >;
+	onSuccess?: ( response: any ) => void;
 	message?: string;
 	title: string;
 	okLabel: string;
@@ -53,9 +52,9 @@ type DeleteModalProps = {
 export default function Delete( {
 	id,
 	title,
-	path,
 	setId,
-	refresh,
+	onSubmit,
+	onSuccess,
 	okLabel,
 	cancelLabel,
 	message = __( 'Are you sure you want to delete this item?' ),
@@ -87,13 +86,10 @@ export default function Delete( {
 		setErrors( {} );
 
 		try {
-			const response = await apiFetch< { message: string } >( {
-				path: `${ path }/${ id }`,
-				method: 'DELETE',
-			} );
+			const response = await onSubmit( id );
 			notify( { message: response.message } );
-			refresh();
 			handleClose();
+			onSuccess?.( response );
 		} catch ( error: any ) {
 			console.error( error );
 			if ( error?.message ) {

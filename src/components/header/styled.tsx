@@ -59,6 +59,9 @@ export const MobileActions = styled.div`
 `;
 
 export const HeaderMenuWrapper = styled.nav`
+	display: flex;
+	gap: 4px;
+
 	@media ( max-width: 768px ) {
 		display: none;
 	}

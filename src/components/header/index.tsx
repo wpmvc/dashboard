@@ -46,7 +46,11 @@ const Header: React.FC< HeaderProps > = ( {
 				{ ( fills: any ) => {
 					if ( fills.length ) {
 						return (
-							<HeaderWrapper $left={ left } $top={ top }>
+							<HeaderWrapper
+								$left={ left }
+								$top={ top }
+								className="wpmvc-header"
+							>
 								{ fills }
 							</HeaderWrapper>
 						);
@@ -54,7 +58,11 @@ const Header: React.FC< HeaderProps > = ( {
 
 					return (
 						<>
-							<HeaderWrapper $left={ left } $top={ top }>
+							<HeaderWrapper
+								$left={ left }
+								$top={ top }
+								className="wpmvc-header"
+							>
 								<HeaderContent>
 									<HeaderLeft>
 										{ logo && <Logo>{ logo }</Logo> }

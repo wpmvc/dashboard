@@ -29,15 +29,15 @@ type EditProps = {
 	path: string;
 	editId: number;
 	setEditId: ( id: number ) => void;
-	update: (
+	onSubmit: (
 		id: number,
 		attributes: Record< string, any >
 	) => Promise< { message: string } >;
-	refresh: () => void;
 	fields: FieldsType;
 	title: string;
 	okLabel: string;
 	cancelLabel: string;
+	onSuccess?: ( response: any ) => void;
 };
 
 /**
@@ -47,12 +47,12 @@ export default function Edit( {
 	path,
 	editId,
 	setEditId,
-	update,
-	refresh,
+	onSubmit,
 	fields,
 	title,
 	okLabel,
 	cancelLabel,
+	onSuccess,
 }: EditProps ) {
 	const [ isOpen, setOpen ] = useState( false );
 	const [ isLoading, setLoading ] = useState( true );
@@ -108,13 +108,13 @@ export default function Edit( {
 				closeModal();
 				setLoading( true );
 			} }
-			onSubmit={ ( attrs ) => update( editId, attrs ) }
-			refresh={ refresh }
+			onSubmit={ ( attrs ) => onSubmit( editId, attrs ) }
 			initialAttributes={ attributes }
 			isLoading={ isLoading }
 			attributes={ attributes }
 			setAttributes={ setAttributes }
 			resetAttributes={ resetAttributes }
+			onSuccess={ onSuccess }
 		/>
 	);
 }

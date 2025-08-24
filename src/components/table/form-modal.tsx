@@ -48,7 +48,7 @@ type FormModalProps = {
 	onSubmit: (
 		attributes: Record< string, any >
 	) => Promise< { message: string } >;
-	refresh: () => void;
+	onSuccess?: ( response: any ) => void;
 	isLoading?: boolean;
 	initialAttributes?: Record< string, any >;
 	attributes: Record< string, any >;
@@ -69,7 +69,7 @@ export default function FormModal( {
 	fields,
 	onClose,
 	onSubmit,
-	refresh,
+	onSuccess,
 	isLoading = false,
 	attributes,
 	setAttributes,
@@ -109,9 +109,9 @@ export default function FormModal( {
 		try {
 			const response = await onSubmit( attributes );
 			notify( { message: response.message } );
-			refresh();
 			handleClose();
 			resetAttributes();
+			onSuccess?.( response );
 		} catch ( error: any ) {
 			setErrors(
 				error?.messages || {

@@ -52,7 +52,11 @@ export default function Wrapper( props: WrapperProps ) {
 
 	return (
 		<ColorWrapper>
-			<StyledWrapper $top={ top } $left={ left }>
+			<StyledWrapper
+				$top={ top }
+				$left={ left }
+				className="wpmvc-dashboard-wrapper"
+			>
 				{ ! isHeaderHidden && (
 					<Header { ...props } left={ left } top={ top } />
 				) }

@@ -21,28 +21,28 @@ import CreateModal from './create-modal';
  * Props for Create component
  */
 type CreateProps = {
-	store: (
+	onSubmit: (
 		attributes: Record< string, any >
 	) => Promise< { message: string } >;
-	refresh: () => void;
 	addNewLabel?: string;
 	fields: FieldsType;
 	title: string;
 	okLabel: string;
 	cancelLabel: string;
+	onSuccess?: ( response: any ) => void;
 };
 
 /**
  * Create button and modal wrapper
  */
 export default function Create( {
-	store,
-	refresh,
+	onSubmit,
 	fields,
 	addNewLabel,
 	title,
 	okLabel,
 	cancelLabel,
+	onSuccess,
 }: CreateProps ) {
 	const [ isOpen, setOpen ] = useState( false );
 
@@ -59,10 +59,10 @@ export default function Create( {
 				isOpen={ isOpen }
 				closeModal={ closeModal }
 				fields={ fields }
-				store={ store }
-				refresh={ refresh }
+				onSubmit={ onSubmit }
 				okLabel={ okLabel }
 				cancelLabel={ cancelLabel }
+				onSuccess={ onSuccess }
 			/>
 		</>
 	);

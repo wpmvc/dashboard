@@ -17,7 +17,7 @@ export const MenuButton = styled( Button )< MenuButtonProps >`
 		$active ? 'var(--wpmvc-primary-500)' : 'var(--wpmvc-gray-900)' };
 
 	background-color: ${ ( { $active } ) =>
-		$active ? 'var(--wpmvc-gray-50)' : 'transparent' };
+		$active ? 'var(--wpmvc-primary-25)' : 'transparent' };
 
 	svg {
 		opacity: ${ ( { $active } ) => ( $active ? 1 : 0.6 ) };
