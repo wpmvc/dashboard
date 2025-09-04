@@ -53,6 +53,7 @@ type CRUD = {
 	cancelLabel?: string;
 	onClick?: ( item: any ) => void;
 	onSuccess?: ( response: any ) => void;
+	isDisabled?: boolean;
 };
 
 type Destroy = Omit< CRUD, 'fields' > & {
