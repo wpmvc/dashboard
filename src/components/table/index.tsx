@@ -7,11 +7,12 @@
 /**
  * WordPress Dependencies
  */
-import { Card } from '@wordpress/components';
-import { useMemo, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import { Card, CardBody, CardFooter, CardHeader } from '@wordpress/components';
 import { useInstanceId } from '@wordpress/compose';
+import { useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { trash } from '@wordpress/icons';
 
 /**
  * External Dependencies
@@ -22,26 +23,25 @@ import styled from 'styled-components';
  * Internal Dependencies
  */
 import { Table as TableComponent } from '@wpmvc/components';
-import SectionHeader from '../settings/section-header';
+import { Layout } from '@wpmvc/components/build-types/gutenberg/table/types';
 import {
 	registerCrudStore,
 	useCrudQueryParams,
 	useCrudStore,
 	useCrudStoreData,
 } from '@wpmvc/data';
-import Create from './create';
-import Edit from './edit';
-import Delete from './delete';
 import { FieldsType } from '@wpmvc/fields/build-types/types/field';
 import { isUndefined } from 'lodash';
-import { Layout } from '@wpmvc/components/build-types/gutenberg/table/types';
+import SectionHeader from '../settings/section-header';
+import Create from './create';
+import Delete from './delete';
+import Edit from './edit';
 
 /**
  * Styled wrapper for the table card
  */
 const StyledCard = styled.div`
 	margin: 0 auto;
-	padding: 24px;
 `;
 
 type CRUD = {
@@ -70,9 +70,13 @@ type TableProps = {
 	path: string;
 	columns: any[];
 	storeName?: string;
+	actions?: any[];
 	create?: Create;
 	edit?: Edit;
 	destroy?: Destroy;
+	showTable?: boolean;
+	beforeTable?: React.ReactNode;
+	cardFooter?: React.ReactNode;
 	layoutType?: string;
 	layout?: Layout;
 	layouts?: {
@@ -95,9 +99,13 @@ export default function Table( {
 	path,
 	columns,
 	storeName,
+	actions,
 	create,
 	destroy,
 	edit,
+	showTable = true,
+	beforeTable,
+	cardFooter,
 	...props
 }: TableProps ) {
 	const instanceId = useInstanceId( Table, 'wpmvc-dashboard-table' );
@@ -134,7 +142,7 @@ export default function Table( {
 	const isEnabledDestroy =
 		isUndefined( destroy?.status ) || destroy?.status === true;
 
-	const actions = useMemo( () => {
+	const defaultActions = useMemo( () => {
 		let items = [];
 
 		if ( isEnabledEdit ) {
@@ -156,8 +164,9 @@ export default function Table( {
 		if ( isEnabledDestroy ) {
 			items.push( {
 				id: 'delete',
+				icon: trash,
 				label: destroy?.buttonLabel ?? __( 'Delete' ),
-				isDestructive: true,
+				isPrimary: true,
 				callback: ( items: any[] ) => {
 					const id = parseInt( items[ 0 ]?.id ?? items[ 0 ]?.ID );
 					if ( ! isNaN( id ) ) setDeleteId( id );
@@ -167,6 +176,10 @@ export default function Table( {
 
 		return items;
 	}, [ isEnabledEdit, isEnabledDestroy ] );
+
+	const mergedActions = useMemo( () => {
+		return [ ...( actions ?? [] ), ...defaultActions ];
+	}, [ actions, defaultActions ] );
 
 	const queryParams = useCrudQueryParams( { name: storeKey } );
 
@@ -212,28 +225,31 @@ export default function Table( {
 	}, [ columns, updateItem, path ] );
 
 	return (
-		<>
+		<Card>
 			<StyledCard>
-				<SectionHeader heading={ heading }>
-					{ isEnabledCreate && ! create?.onClick && (
-						<Create
-							onSubmit={ createStore }
-							fields={ create?.fields ?? {} }
-							addNewLabel={
-								create?.buttonLabel ?? __( 'Add New' )
-							}
-							title={ create?.title ?? __( 'Add Item' ) }
-							okLabel={ create?.okLabel ?? __( 'Create' ) }
-							cancelLabel={
-								create?.cancelLabel ?? __( 'Cancel' )
-							}
-							onSuccess={ ( response ) => {
-								create?.onSuccess?.( response );
-								resetQueryParamsAndRefresh();
-							} }
-						/>
-					) }
-				</SectionHeader>
+				<CardHeader>
+					<SectionHeader heading={ heading }>
+						{ isEnabledCreate && ! create?.onClick && (
+							<Create
+								onSubmit={ createStore }
+								fields={ create?.fields ?? {} }
+								addNewLabel={
+									create?.buttonLabel ?? __( 'Add New' )
+								}
+								title={ create?.title ?? __( 'Add Item' ) }
+								okLabel={ create?.okLabel ?? __( 'Create' ) }
+								cancelLabel={
+									create?.cancelLabel ?? __( 'Cancel' )
+								}
+								onSuccess={ ( response ) => {
+									create?.onSuccess?.( response );
+									resetQueryParamsAndRefresh();
+								} }
+							/>
+						) }
+					</SectionHeader>
+				</CardHeader>
+				
 				{ isEnabledEdit && (
 					<Edit
 						path={ path }
@@ -259,19 +275,25 @@ export default function Table( {
 						onSuccess={ destroy?.onSuccess }
 					/>
 				) }
-				<Card style={ { borderRadius: 4, overflow: 'hidden' } }>
-					<TableComponent
-						{ ...props }
-						items={ data.items ?? [] }
-						total={ data.total ?? 0 }
-						isLoading={ ! isResolved }
-						fields={ processedColumns }
-						refresh={ refresh }
-						actions={ actions }
-						queryParams={ queryParams }
-					/>
-				</Card>
+				<CardBody>
+					{ beforeTable }
+					{
+						showTable && (
+							<TableComponent
+								{ ...props }
+								items={ data.items ?? [] }
+								total={ data.total ?? 0 }
+								isLoading={ ! isResolved }
+								fields={ processedColumns }
+								refresh={ refresh }
+								actions={ mergedActions }
+								queryParams={ queryParams }
+							/>
+						)
+					}
+				</CardBody>
+				{ cardFooter && <CardFooter>{ cardFooter }</CardFooter> }
 			</StyledCard>
-		</>
+		</Card>
 	);
 }

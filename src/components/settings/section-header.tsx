@@ -3,14 +3,12 @@ import {
 	FlexBlock,
 	FlexItem,
 	__experimentalHeading as Heading,
+	__experimentalText as Text,
 } from '@wordpress/components';
-import { __experimentalText as Text } from '@wordpress/components';
 import styled from 'styled-components';
 import type { SectionHeader } from './types';
 
 const StyledSectionHeader = styled( Flex )`
-	margin-bottom: 20px;
-
 	h2 {
 		font-size: 16px;
 		line-height: 20px;
