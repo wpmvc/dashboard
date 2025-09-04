@@ -30,6 +30,7 @@ type CreateProps = {
 	okLabel: string;
 	cancelLabel: string;
 	onSuccess?: ( response: any ) => void;
+	isDisabled?: boolean;
 };
 
 /**
@@ -43,6 +44,7 @@ export default function Create( {
 	okLabel,
 	cancelLabel,
 	onSuccess,
+	isDisabled,
 }: CreateProps ) {
 	const [ isOpen, setOpen ] = useState( false );
 
@@ -51,7 +53,7 @@ export default function Create( {
 
 	return (
 		<>
-			<Button variant="primary" onClick={ openModal }>
+			<Button variant="primary" onClick={ openModal } disabled={ isDisabled }>
 				{ addNewLabel || __( 'Add New' ) }
 			</Button>
 			<CreateModal

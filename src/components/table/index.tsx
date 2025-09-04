@@ -245,6 +245,7 @@ export default function Table( {
 									create?.onSuccess?.( response );
 									resetQueryParamsAndRefresh();
 								} }
+								isDisabled={ create?.isDisabled }
 							/>
 						) }
 					</SectionHeader>
