@@ -149,7 +149,7 @@ export default function Table( {
 		if ( isEnabledEdit ) {
 			items.push( {
 				id: 'edit',
-				label: create?.buttonLabel ?? __( 'Edit' ),
+				label: edit?.buttonLabel ?? __( 'Edit' ),
 				callback: ( items: any[] ) => {
 					const item = items[ 0 ];
 					if ( edit?.onClick ) {
