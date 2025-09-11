@@ -42,6 +42,14 @@ import Edit from './edit';
  */
 const StyledCard = styled.div`
 	margin: 0 auto;
+	.dataviews-view-table{
+		thead{
+			th{
+				background-color: #F9F9F9;
+				border-bottom: 1px solid #F0F0F0;
+			}
+		}
+	}
 `;
 
 type CRUD = {
