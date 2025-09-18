@@ -67,6 +67,21 @@ export const HeaderMenuWrapper = styled.nav`
 	}
 `;
 
+export const HeaderTopWrapper = styled.div`
+	width: 100%;
+`;
+
+export const HeaderBottomWrapper = styled.div`
+	padding: 0 20px;
+	position: fixed;
+	top: 103px;
+	left: 160px;
+	width: 100%;
+	z-index: 99;
+	background-color: #fff;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+`;
+
 type ResponsiveMenuWrapperProps = {
 	$open: boolean;
 	$top: number;

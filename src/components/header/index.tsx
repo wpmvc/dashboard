@@ -1,20 +1,22 @@
+import { Slot } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
+import { addAction, doAction, removeAction } from '@wordpress/hooks';
+import { menu } from '@wordpress/icons';
+import WP_HOOKS from '../../constants/wp-hooks';
+import Menu, { MenuItems } from '../menu';
 import {
+	HeaderBottomWrapper,
 	HeaderContent,
 	HeaderLeft,
 	HeaderMenuWrapper,
 	HeaderRight,
+	HeaderTopWrapper,
 	HeaderWrapper,
 	Logo,
 	MobileActions,
 	ResponsiveMenuWrapper,
 } from './styled';
-import Menu, { MenuItems } from '../menu';
-import { Slot } from '@wordpress/components';
-import { menu } from '@wordpress/icons';
 import { HeaderProps } from './types';
-import { addAction, doAction, removeAction } from '@wordpress/hooks';
-import WP_HOOKS from '../../constants/wp-hooks';
 
 const Header: React.FC< HeaderProps > = ( {
 	left,
@@ -41,26 +43,26 @@ const Header: React.FC< HeaderProps > = ( {
 	}, [ menuHandler ] );
 
 	return (
-		<>
+		<HeaderWrapper
+			$left={ left }
+			$top={ top }
+		>
 			<Slot name="wpmvc-header">
 				{ ( fills: any ) => {
 					if ( fills.length ) {
 						return (
-							<HeaderWrapper
-								$left={ left }
-								$top={ top }
+							<HeaderTopWrapper
 								className="wpmvc-header"
 							>
 								{ fills }
-							</HeaderWrapper>
+							</HeaderTopWrapper>
 						);
 					}
 
 					return (
 						<>
-							<HeaderWrapper
-								$left={ left }
-								$top={ top }
+							<HeaderTopWrapper
+								
 								className="wpmvc-header"
 							>
 								<HeaderContent>
@@ -105,7 +107,7 @@ const Header: React.FC< HeaderProps > = ( {
 										</Menu>
 									</MobileActions>
 								</HeaderContent>
-							</HeaderWrapper>
+							</HeaderTopWrapper>
 							<ResponsiveMenuWrapper
 								$open={ mobileMenuOpen }
 								$top={ top }
@@ -125,7 +127,23 @@ const Header: React.FC< HeaderProps > = ( {
 					);
 				} }
 			</Slot>
-		</>
+			
+			<Slot name="wpmvc-header-after">
+				{
+					( fills: any ) => {
+						if(fills.length == 0) {
+							return null
+						}
+
+						return (
+							<HeaderBottomWrapper>
+								{ fills }
+							</HeaderBottomWrapper>
+						)
+					}
+				}
+			</Slot>
+		</HeaderWrapper>
 	);
 };
 
