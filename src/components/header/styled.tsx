@@ -7,17 +7,17 @@ interface HeaderWrapperProps {
 
 export const HeaderWrapper = styled.header< HeaderWrapperProps >`
 	position: fixed;
-	height: var( --wpmvc-header-height );
+	min-height: var( --wpmvc-header-height );
 	top: ${ ( props ) => `${ props.$top }px` };
 	left: ${ ( props ) => `${ props.$left }px` };
 	right: 0;
+	height: auto;
 	background: white;
-	padding: 0px 24px;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	z-index: 99;
-	border-bottom: 1px solid rgba( 0, 0, 0, 0.13 );
 `;
 
 export const Logo = styled.div`
@@ -69,13 +69,12 @@ export const HeaderMenuWrapper = styled.nav`
 
 export const HeaderTopWrapper = styled.div`
 	width: 100%;
+	padding: 0 24px;
+	box-sizing: border-box;
+	border-bottom: 1px solid rgba( 0, 0, 0, 0.13 );
 `;
 
 export const HeaderBottomWrapper = styled.div`
-	padding: 0 20px;
-	position: fixed;
-	top: 103px;
-	left: 160px;
 	width: 100%;
 	z-index: 99;
 	background-color: #fff;

@@ -136,7 +136,7 @@ const Header: React.FC< HeaderProps > = ( {
 						}
 
 						return (
-							<HeaderBottomWrapper>
+							<HeaderBottomWrapper className='wpmvc-header-after'>
 								{ fills }
 							</HeaderBottomWrapper>
 						)
