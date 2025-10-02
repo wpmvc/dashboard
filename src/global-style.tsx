@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
     --wp-components-color-gray-600: var(--wpmvc-gray-600);
     --wp-components-color-foreground: var(--wpmvc-background-dark);
   }
+
+  .components-toggle-group-control::before {
+    background: var( --wpmvc-primary-500, var( --wp-components-color-foreground, #1e1e1e ) ) !important;
+  }
 `;
 
 export default GlobalStyle;
