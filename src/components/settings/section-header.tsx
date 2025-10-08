@@ -36,7 +36,7 @@ export default function SectionHeader( {
 				<Heading>{ heading }</Heading>
 				{ description && <Text as={ 'p' }>{ description }</Text> }
 			</FlexBlock>
-			{ children && <FlexItem>{ children }</FlexItem> }
+			{ children && <FlexItem style={ { display: 'flex', gap: 8 } }>{ children }</FlexItem> }
 		</StyledSectionHeader>
 	);
 }

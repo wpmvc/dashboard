@@ -85,6 +85,7 @@ type TableProps = {
 	destroy?: Destroy;
 	showTable?: boolean;
 	beforeTable?: React.ReactNode;
+	headerRight?: React.ReactNode;
 	cardFooter?: React.ReactNode;
 	layoutType?: string;
 	layout?: Layout;
@@ -115,6 +116,7 @@ export default function Table( {
 	showTable = true,
 	beforeTable,
 	cardFooter,
+	headerRight,
 	...props
 }: TableProps ) {
 	const instanceId = useInstanceId( Table, 'wpmvc-dashboard-table' );
@@ -238,6 +240,7 @@ export default function Table( {
 			<StyledCard>
 				<CardHeader>
 					<SectionHeader heading={ heading }>
+						{ headerRight }
 						{ isEnabledCreate && ! create?.onClick && (
 							<Create
 								onSubmit={ createStore }
